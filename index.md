@@ -63,7 +63,7 @@ class Input extends Popcorn{
     }
 }
 ```
-Load up the `loadKernel` method, and return a object-based functions with it. Take note how the oninput is written to include the kernels. Now it's ready. Give it a try yourself.
+Load up the `loadKernel` method, and return object-based functions with it. Take note how the oninput is written to include the kernels. Now it's ready. Give it a try yourself.
 
 ## What? We have states?
 Yes! Else how would it be reactive?
@@ -193,7 +193,7 @@ class Input extends Popcorn{
     }
     
     hasRerendered(){
-        alert('I have rerendered);
+        alert('I have rerendered');
     }
     
     render(){
