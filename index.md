@@ -149,10 +149,10 @@ class ChildComponent extends Popcorn{
 Ever find the usefulness of compartmentalised JS? To keep it completely separated from each other, that is.
 To do so, we should also split our CSS and contain them to its own components, or not. It is entirely up to you really.
 
-### LoadJS()
+### LoadCSS()
 Things to take note:
 - `this.classes` is used to assign class names to each element
-- `loadCSS method`
+- `loadCSS()` method, and how it is written in JSON.
 
 ```javascript
 class Input extends Popcorn{
@@ -163,6 +163,37 @@ class Input extends Popcorn{
                 "border-color": "white"
             }
         }
+    }
+    
+    render(){
+        return `<input class='${this.classes.input}'>`
+    }
+}
+```
+
+## Popcorn Listeners
+At times you may want to trigger some actions on component load status. These are built in and is as such:
+- `willBeRendered()` (Fired just as the component is ready to load the UI)
+- `hasRendered()` (Fired after UI is pushed to the view)
+- `willRerender()` (Fired when states are about to get updated)
+- `hasRerendered()` (Fired after states got updated)
+
+```javascript
+class Input extends Popcorn{
+    willBeRendered(){
+        alert('I am about to be rendered');
+    }
+    
+    hasRendered(){
+        alert('I am rendered');
+    }
+    
+    willRerender(){
+        alert('My state has just been changed, and I will be rerendered');
+    }
+    
+    hasRerendered(){
+        alert('I have rerendered);
     }
     
     render(){
