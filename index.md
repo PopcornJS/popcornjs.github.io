@@ -1,6 +1,6 @@
 # PopcornJS
 
-PopcornJS is a mini JavaScript library that is aimed at tackling lightweight reactive UI components. How will you benefit from PopcornJS? Imagine all the big libraries of frameworks out there running on webpacks, with NodeJS services running on the backend; would you really need those for a simple application? Or, would you really like to rewrite your entire application's frontend just for some added features?
+PopcornJS is a mini JavaScript library that is aimed at tackling lightweight reactive UI components. How will you benefit from PopcornJS? Imagine all the big libraries or frameworks out there running on webpacks, with NodeJS services running on the backend; would you really need those for a simple application? Or, would you really like to rewrite your entire application's frontend just for some added features?
 
 Guess not, hence you stumble upon this library.
 
@@ -89,7 +89,7 @@ class ExampleComponent extends Popcorn{
         return(
             `
             <p>Hello ${this.state.message}</p>
-            <p>Hello ${dataStr}</p>
+            <p>${dataStr}</p>
             `
         )
     }
@@ -102,4 +102,71 @@ exampleComponent.setState({
     message: "Bye World",
     data: ['I', 'Shall', 'Sleep']
 })
+```
+
+## Multi-tiered Components
+What if you need components, within a component? Just get it in, what else?
+
+Things to take note:
+- The `createDOM()` method
+- Passing states to child
+
+#### Parrent Component:
+```javascript
+class ParentComponent extends Popcorn{
+    render(){
+        let list = "";
+        for(let i=0; i<this.state.data.length; i++){
+            list += `<li>${this.state.data[i]}</li>`
+        }
+        return(
+            `
+            ${new ChildComponent(this.state).createDOM()}
+            <ul>
+                ${list}
+            </ul>
+            `
+        )
+    }
+}
+```
+Take note on how you can pass the states to the child component(s).
+
+#### Child Component:
+```javascript
+class ChildComponent extends Popcorn{
+    render(){
+        return(
+            `
+            <p>Hello ${this.state.message}</p>
+            `
+        )
+    }
+}
+```
+
+## Loading Unique CSS?
+Ever find the usefulness of compartmentalised JS? To keep it completely separated from each other, that is.
+To do so, we should also split our CSS and contain them to its own components, or not. It is entirely up to you really.
+
+### LoadJS()
+Things to take note:
+- `this.classes` is used to assign class names to each element
+- `loadCSS method`
+
+```javascript
+class Input extends Popcorn{
+    loadCSS(){
+        return {
+            ".input": {
+                "font-size": "30px",
+                "border-color": "white"
+            }
+        }
+    }
+    
+    render(){
+        return `<input class='${this.classes.input}'>`
+    }
+}
 ```
